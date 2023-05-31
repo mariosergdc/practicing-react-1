@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+/* import axios from "axios"; */
+import { useEffect, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [fact, setFact] = useState("");
+
+  const getCat = () => {
+    /* axios.get("https://catfact.ninja/fact").then((res) => {
+      let fact = res.data.fact;
+      console.log(fact);
+      setFact(fact);
+      console.log(fact.split(" ", 3).join(" "));
+    }); */
+
+    fetch("https://catfact.ninja/fact")
+      .then((response) => response.json())
+      .then((json) => {
+        let fact = json.fact;
+        console.log(fact);
+        setFact(fact);
+        console.log(fact.split(" ", 3).join(" "));
+      }).catch((err)=>console.error(err));
+  };
+
+  useEffect(() => {
+    getCat();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>My Sandbox</h1>
+      <h2>Cat Fact</h2>
+      <h3>{fact? fact:null} </h3>
+      <h4>{fact?.split(" ", 3).join(" ") || null}</h4>
+    </div>
+  );
 }
-
-export default App
