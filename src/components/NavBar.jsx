@@ -1,16 +1,10 @@
-import { NavLink } from "react-router-dom";
+import Hamburger from "./Hamburger";
 
 export default function NavBar() {
   return (
     <nav className="nav-bar">
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/exercise-1">Exercise-1</NavLink>
-        </li>
-      </ul>
+      <hi>MarioSergDC</hi>
+      <Hamburger />
     </nav>
   );
 }
