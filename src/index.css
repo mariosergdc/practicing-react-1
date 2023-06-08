@@ -26,7 +26,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -66,4 +65,24 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.nav-bar {
+  width: 100vw;
+  display: flex;
+  background-color: #000000;
+}
+
+.nav-bar > ul {
+  display: flex;
+  list-style: none;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 1rem;
+}
+
+li {
+  margin: 1rem;
 }
