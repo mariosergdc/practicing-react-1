@@ -10,14 +10,6 @@ const Hamburger = () => {
 
   return (
     <div>
-      <div
-        onClick={handleClick}
-        className={`hamburger ${open ? "is-active" : ""} `}
-      >
-        <div className="layer top"></div>
-        <div className="layer mid"></div>
-        <div className="layer bottom"></div>
-      </div>
       <nav
         onClick={handleClick}
         className={`menuppal ${open ? "is_active" : ""} `}
@@ -31,6 +23,14 @@ const Hamburger = () => {
           </li>
         </ul>
       </nav>
+      <div
+        onClick={handleClick}
+        className={`hamburger ${open ? "is-active" : ""} `}
+      >
+        <div className="layer top"></div>
+        <div className="layer mid"></div>
+        <div className="layer bottom"></div>
+      </div>
     </div>
   );
 };
