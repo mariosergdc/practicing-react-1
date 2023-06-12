@@ -24,6 +24,9 @@ const Hamburger = () => {
           <li>
             <NavLink to="/exercise-2">Exercise-2</NavLink>
           </li>
+          <li>
+            <NavLink to="/exercise-3">Exercise-3</NavLink>
+          </li>
         </ul>
       </nav>
       <div
