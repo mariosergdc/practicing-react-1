@@ -18,11 +18,17 @@ const Exercise2 = () => {
     for (let i = 0; i < romano.length - 1; i++) {
       if (RomanosValues[romano[i]] < RomanosValues[romano[i + 1]]) {
         acumulator -= RomanosValues[romano[i]];
+        console.log("restar", RomanosValues[romano[i]]);
+        console.log(acumulator);
       } else {
         acumulator += RomanosValues[romano[i]];
+        console.log("sumar", RomanosValues[romano[i]]);
+        console.log(acumulator);
       }
     }
     acumulator += RomanosValues[romano[romano.length - 1]];
+    console.log("sumar ultimo", RomanosValues[romano[romano.length - 1]]);
+    console.log(acumulator);
     setDecimal(acumulator);
     return acumulator;
   };

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./Exercise3.css";
 
 const ExaChars = {
@@ -22,6 +22,7 @@ const ExaChars = {
 
 const Exercise3 = () => {
   const divBg = useRef(null);
+  const [bgColor, setBgColor] = useState("");
 
   const changeBgColor = () => {
     let color = "#";
@@ -32,13 +33,27 @@ const Exercise3 = () => {
     //getComputedStyle para obtener el valor de propiedades de css extarnas, solo lectura
     //const computedStyle = getComputedStyle(divBg.current);
     //console.log(computedStyle.backgroundColor);
-    divBg.current.style.backgroundColor = `${color}`;
+    divBg.current.style.backgroundColor = color;
+    setBgColor(color);
   };
 
   return (
     <div ref={divBg} className="change-bg-color">
       <h1>Exercise3</h1>
       <button onClick={changeBgColor}>Change Background color</button>
+      <h2
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          padding: "1rem",
+          width: "20%",
+          height: "3rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {bgColor}
+      </h2>
     </div>
   );
 };
