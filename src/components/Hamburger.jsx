@@ -30,6 +30,9 @@ const Hamburger = () => {
           <li>
             <NavLink to="/counter">Counter</NavLink>
           </li>
+          <li>
+            <NavLink to="/pokemons">Pokemons</NavLink>
+          </li>
         </ul>
       </nav>
       <div

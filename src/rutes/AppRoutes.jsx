@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import Exercise2 from "../components/Exercise2";
 import Exercise3 from "../components/Exercise3";
 import Counter from "../components/Counter";
+import Pokemons from "../components/Pokemons";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route path="/exercise-2" element={<Exercise2 />} />
         <Route path="/exercise-3" element={<Exercise3 />} />
         <Route path="/counter" element={<Counter />} />
+        <Route path="/pokemons" element={<Pokemons />} />
       </Routes>
     </Router>
   );
