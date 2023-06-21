@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Pokemon from "./Pokemon";
+import "./Pokemons.css";
 const Pokemons = () => {
   const [pokemons, setPokemons] = useState([]);
 
@@ -15,13 +16,15 @@ const Pokemons = () => {
     getPokemons();
   }, []);
   return (
-    <>
+    <main>
       <h1>Pokemons</h1>
       <div>List of Pokemons</div>
-      {pokemons.map((pok) => {
-        return <Pokemon key={pok.name} pok={pok} />;
-      })}
-    </>
+      <div className="pokemons-list">
+        {pokemons.map((pok) => {
+          return <Pokemon key={pok.name} pok={pok} />;
+        })}
+      </div>
+    </main>
   );
 };
 

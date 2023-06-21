@@ -1,3 +1,4 @@
+import "./Pokemon.css";
 import { useEffect, useState } from "react";
 
 const Pokemon = ({ pok }) => {
@@ -6,7 +7,7 @@ const Pokemon = ({ pok }) => {
 
   useEffect(() => {
     const getPokemon = () => {
-      fetch(pok.url)
+      fetch(pok?.url)
         .then((res) => res.json())
         .then((data) => {
           console.log(data.sprites.front_default);
@@ -18,11 +19,10 @@ const Pokemon = ({ pok }) => {
   }, [pok]);
 
   return (
-    <>
-      <div>Pokemon</div>
+    <div className="pokemon-card">
       {pokemon.name && <div>{pokemon.name}</div>}
       <img src={img} alt="img" />
-    </>
+    </div>
   );
 };
 
