@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Pokemon from "./Pokemon";
 import "./Pokemons.css";
-const LIMIT = 20;
+const LIMIT = 10;
 
 const Pokemons = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -11,6 +11,7 @@ const Pokemons = () => {
 
   useEffect(() => {
     const getPokemons = async () => {
+      setLoading(true);
       fetch(
         ` https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}&offset=${
           page * LIMIT
@@ -18,8 +19,8 @@ const Pokemons = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.results);
           setPokemons([...pokemons, ...data.results]);
+          setLoading(false);
         });
     };
     getPokemons();
@@ -49,9 +50,12 @@ const Pokemons = () => {
       <h1>Pokemons</h1>
       <div>List of Pokemons</div>
       <div className="pokemons-list">
-        {pokemons.map((pok) => {
-          return <Pokemon key={pok.name} pok={pok} />;
+        {pokemons.map((pok, key) => {
+          return <Pokemon key={key} pok={pok} />;
         })}
+      </div>
+      <div>
+        {loading && <div style={{ backgroundColor: "red" }}>Loading...</div>}
       </div>
     </main>
   );

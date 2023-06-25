@@ -10,7 +10,6 @@ const Pokemon = ({ pok }) => {
       fetch(pok?.url)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.sprites.front_default);
           setImg(data.sprites.front_default);
         });
     };
