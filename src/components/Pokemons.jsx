@@ -12,12 +12,14 @@ const Pokemons = () => {
   useEffect(() => {
     const getPokemons = async () => {
       fetch(
-        ` https://pokeapi.co/api/v2/pokemon?limit=20&offset=${page * LIMIT}`
+        ` https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}&offset=${
+          page * LIMIT
+        }`
       )
         .then((res) => res.json())
         .then((data) => {
           console.log(data.results);
-          setPokemons(data.results);
+          setPokemons([...pokemons, ...data.results]);
         });
     };
     getPokemons();
