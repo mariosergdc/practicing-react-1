@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const Prueba1 = () => {
   const [users, setUsers] = useState([]);
   const [color, setColor] = useState(false);
+  const [country, setCountry] = useState(false);
   useEffect(() => {
     fetch("https://randomuser.me/api/?results=100")
       .then((res) => res.json())
@@ -13,10 +14,22 @@ const Prueba1 = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  let sortedByCountries = [];
+  if (country) {
+    sortedByCountries = [...users].sort((a, b) =>
+      a.location.country
+        .toLowerCase()
+        .localeCompare(b.location.country.toLowerCase())
+    );
+  } else {
+    sortedByCountries = users;
+  }
+
   return (
     <>
       <nav>
         <button onClick={() => setColor(!color)}>Color</button>
+        <button onClick={() => setCountry(!country)}>Ordenar por País</button>
       </nav>
       <div>
         <div>Tabla de Usuarios</div>
@@ -31,7 +44,7 @@ const Prueba1 = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => {
+            {sortedByCountries.map((user, index) => {
               let bgColor;
               if (color) {
                 bgColor = index % 2 === 0 ? "#333" : "#777";
