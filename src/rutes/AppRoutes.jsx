@@ -5,6 +5,7 @@ import Exercise2 from "../components/Exercise2";
 import Exercise3 from "../components/Exercise3";
 import Counter from "../components/Counter";
 import Pokemons from "../components/Pokemons";
+import Error404 from "../components/Error404";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
         <Route path="/exercise-3" element={<Exercise3 />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/pokemons" element={<Pokemons />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
   );
