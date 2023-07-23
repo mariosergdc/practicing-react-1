@@ -1,18 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Prueba1 = () => {
   const [users, setUsers] = useState([]);
   const [color, setColor] = useState(false);
   const [country, setCountry] = useState(false);
+  const originalUsers = useRef([]);
+
   useEffect(() => {
     fetch("https://randomuser.me/api/?results=100")
       .then((res) => res.json())
       .then((res) => {
         console.log(res.results);
         setUsers(res.results);
+        originalUsers.current = res.results;
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleDelete = (id) => {
+    setUsers(users.filter((u) => u.login.uuid !== id));
+  };
+
+  const handleReset = () => {
+    setUsers(originalUsers.current);
+  };
 
   let sortedByCountries = [];
   if (country) {
@@ -30,6 +41,7 @@ const Prueba1 = () => {
       <nav>
         <button onClick={() => setColor(!color)}>Color</button>
         <button onClick={() => setCountry(!country)}>Ordenar por País</button>
+        <button onClick={handleReset}>Reset Usuarios</button>
       </nav>
       <div>
         <div>Tabla de Usuarios</div>
@@ -62,7 +74,9 @@ const Prueba1 = () => {
                   <td>{user.name.last}</td>
                   <td>{user.location.country}</td>
                   <td>
-                    <button>Eliminar</button>
+                    <button onClick={() => handleDelete(user.login.uuid)}>
+                      Eliminar
+                    </button>
                   </td>
                 </tr>
               );
