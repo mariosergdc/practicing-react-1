@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const Prueba1 = () => {
   const [users, setUsers] = useState([]);
+  const [filter, setFilter] = useState("");
   const [color, setColor] = useState(false);
   const [country, setCountry] = useState(false);
   const originalUsers = useRef([]);
@@ -25,7 +26,12 @@ const Prueba1 = () => {
     setUsers(originalUsers.current);
   };
 
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
   let sortedByCountries = [];
+  let showUsersFiltred = [];
   if (country) {
     sortedByCountries = [...users].sort((a, b) =>
       a.location.country
@@ -36,12 +42,26 @@ const Prueba1 = () => {
     sortedByCountries = users;
   }
 
+  if (filter !== "") {
+    showUsersFiltred = [...sortedByCountries].filter((u) => {
+      return u.location.country.toLowerCase().includes(filter);
+    });
+  } else {
+    showUsersFiltred = sortedByCountries;
+  }
+
   return (
     <>
       <nav>
         <button onClick={() => setColor(!color)}>Color</button>
         <button onClick={() => setCountry(!country)}>Ordenar por País</button>
         <button onClick={handleReset}>Reset Usuarios</button>
+        <input
+          type="text"
+          value={filter}
+          placeholder="filtrar por país"
+          onChange={handleFilterChange}
+        />
       </nav>
       <div>
         <div>Tabla de Usuarios</div>
@@ -56,7 +76,7 @@ const Prueba1 = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedByCountries.map((user, index) => {
+            {showUsersFiltred.map((user, index) => {
               let bgColor;
               if (color) {
                 bgColor = index % 2 === 0 ? "#333" : "#777";
