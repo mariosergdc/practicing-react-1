@@ -5,6 +5,7 @@ const Prueba1 = () => {
   const [filter, setFilter] = useState("");
   const [color, setColor] = useState(false);
   const [country, setCountry] = useState(false);
+  const [sortByName, setSortByName] = useState(false);
   const originalUsers = useRef([]);
 
   useEffect(() => {
@@ -54,6 +55,16 @@ const Prueba1 = () => {
     return filtredUsers;
   }, [country, filtredUsers]);
 
+  const sortedByName = useMemo(() => {
+    console.log("sortByName");
+    if (sortByName) {
+      return [...sortedByCountries].sort((a, b) =>
+        a.name.first.toLowerCase().localeCompare(b.name.first.toLowerCase())
+      );
+    }
+    return sortedByCountries;
+  }, [sortByName, sortedByCountries]);
+
   return (
     <>
       <nav>
@@ -73,14 +84,19 @@ const Prueba1 = () => {
           <thead>
             <tr>
               <td>Foto</td>
-              <td>Nombre</td>
+              <td
+                style={{ cursor: "pointer" }}
+                onClick={() => setSortByName(!sortByName)}
+              >
+                Nombre
+              </td>
               <td>Apellido</td>
               <td>País</td>
               <td>Acciones</td>
             </tr>
           </thead>
           <tbody>
-            {sortedByCountries.map((user, index) => {
+            {sortedByName.map((user, index) => {
               let bgColor;
               if (color) {
                 bgColor = index % 2 === 0 ? "#333" : "#777";
