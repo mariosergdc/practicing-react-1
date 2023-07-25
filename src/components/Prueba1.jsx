@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const Prueba1 = () => {
   const [users, setUsers] = useState([]);
@@ -30,25 +30,29 @@ const Prueba1 = () => {
     setFilter(e.target.value);
   };
 
-  let sortedByCountries = [];
-  let showUsersFiltred = [];
-  if (country) {
-    sortedByCountries = [...users].sort((a, b) =>
-      a.location.country
-        .toLowerCase()
-        .localeCompare(b.location.country.toLowerCase())
-    );
-  } else {
-    sortedByCountries = users;
-  }
+  const filterByCountry = () => {
+    console.log("filterByCountry");
+    if (filter !== "") {
+      return [...users].filter((u) => {
+        return u.location.country.toLowerCase().includes(filter);
+      });
+    }
+    return users;
+  };
 
-  if (filter !== "") {
-    showUsersFiltred = [...sortedByCountries].filter((u) => {
-      return u.location.country.toLowerCase().includes(filter);
-    });
-  } else {
-    showUsersFiltred = sortedByCountries;
-  }
+  const filtredUsers = useMemo(() => filterByCountry(), [filter, users]);
+
+  const sortedByCountries = useMemo(() => {
+    console.log("sortByCountry");
+    if (country) {
+      return [...filtredUsers].sort((a, b) =>
+        a.location.country
+          .toLowerCase()
+          .localeCompare(b.location.country.toLowerCase())
+      );
+    }
+    return filtredUsers;
+  }, [country, filtredUsers]);
 
   return (
     <>
@@ -76,7 +80,7 @@ const Prueba1 = () => {
             </tr>
           </thead>
           <tbody>
-            {showUsersFiltred.map((user, index) => {
+            {sortedByCountries.map((user, index) => {
               let bgColor;
               if (color) {
                 bgColor = index % 2 === 0 ? "#333" : "#777";
