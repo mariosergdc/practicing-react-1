@@ -7,6 +7,7 @@ import Counter from "../components/Counter";
 import Pokemons from "../components/Pokemons";
 import Error404 from "../components/Error404";
 import Prueba1 from "../components/Prueba1";
+import LeetCode from "../components/LeetCode";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
         <Route path="/prueba-1" element={<Prueba1 />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/pokemons" element={<Pokemons />} />
+        <Route path="/leet" element={<LeetCode />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
