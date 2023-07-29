@@ -42,6 +42,35 @@ const LeetCode = () => {
   };
 
   merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3);
+
+  var largestLocal = function (grid) {
+    let newMat = new Array(grid.length - 2);
+    for (let i = 0; i < grid.length - 2; i++) {
+      newMat[i] = new Array(grid.length - 2);
+      for (let j = 0; j < grid.length - 2; j++) {
+        newMat[i][j] = Math.max(
+          grid[i][j],
+          grid[i][j + 1],
+          grid[i][j + 2],
+          grid[i + 1][j],
+          grid[i + 1][j + 2],
+          grid[i + 2][j],
+          grid[i + 2][j + 1],
+          grid[i + 2][j + 2]
+        );
+      }
+    }
+    return newMat;
+  };
+
+  console.log(
+    largestLocal([
+      [9, 9, 8, 1],
+      [5, 6, 2, 6],
+      [8, 2, 6, 4],
+      [6, 2, 2, 2],
+    ])
+  );
   return <div>LeetCode</div>;
 };
 
